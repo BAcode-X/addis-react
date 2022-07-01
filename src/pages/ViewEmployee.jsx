@@ -1,19 +1,17 @@
 import { Image, Card, Heading, Text, Box } from "rebass";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import React, { useEffect } from "react";
+import React from "react";
 
-import { GET_EMPLOYEE_BY_ID } from "../redux/types";
+import { GET_EMPLOYEES } from "../redux/types";
 
 export default function ViewEmployee(action) {
+  const employees = useSelector(state => state.employees);
   const params = useParams();
   const id = params.id;
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: GET_EMPLOYEE_BY_ID, id: id });
-  }, [dispatch]);
-
-  const employeeData = useSelector((state) => state.employee.employee);
+  React.useEffect(() => {dispatch({ type: GET_EMPLOYEES })}, [])
+  const employeeData = employees.find(emp => emp.id === id);
   return (
     <div>
       <Text textAlign={"center"} fontSize={"2em"}>

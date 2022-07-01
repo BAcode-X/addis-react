@@ -13,12 +13,9 @@ import "./../../node_modules/react-crud-icons/dist/css/react-crud-icons.css";
 export default function MyTable() {
     const employees = useSelector(state => state.employees)
     const dispatch = useDispatch()
-    React.useEffect(() => dispatch({ type: GET_EMPLOYEES }), [])
+    React.useEffect(() => {dispatch({ type: GET_EMPLOYEES })}, [])
     return (
         <>
-        <Text textAlign="center" fontSize="5" fontWeight="bold" pb={4}>
-          Here are our employees
-        </Text>
             <Table>
                 <thead>
                   <tr>
@@ -58,7 +55,7 @@ export default function MyTable() {
                             </Link>
                           </td>
                           <td>
-                            <Button onClick={() => dispatch(setEmployeeSlice(row))}>
+                            <Button onClick={() => dispatch(setEmployeeSlice(emp))}>
                               <Icon
                                 name="edit"
                                 tooltip="Edit"
@@ -66,7 +63,7 @@ export default function MyTable() {
                                 size="small"
                               />
                             </Button>{" "}
-                            <Button onClick={() => dispatch({ type: DELETE_EMPLOYEE_BY_ID, id: row.id })}>
+                            <Button onClick={() => dispatch({ type: DELETE_EMPLOYEE_BY_ID, id: emp.id })}>
                               <Icon
                                 name="delete"
                                 tooltip="Delete"
